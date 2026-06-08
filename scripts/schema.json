@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProductPyramidReport",
+  "description": "产品决策金字塔报告数据结构",
+  "type": "object",
+  "required": ["name", "vision", "positioning", "users", "design", "commercial", "execution"],
+  "properties": {
+    "name": { "type": "string", "description": "产品名称" },
+    "author": { "type": "string", "description": "分析人" },
+    "vision": {
+      "type": "object",
+      "required": ["type", "belief", "philosophy"],
+      "properties": {
+        "type": { "type": "string", "enum": ["改变世界的产品", "做好一个产品"], "description": "产品类型" },
+        "belief": { "type": "string", "description": "核心信念" },
+        "philosophy": { "type": "string", "description": "产品哲学和判断依据" }
+      }
+    },
+    "positioning": {
+      "type": "object",
+      "required": ["oneLiner", "userValue", "market", "timing"],
+      "properties": {
+        "oneLiner": { "type": "string", "description": "一句话描述：为谁解决了什么问题，为什么是你" },
+        "userValue": { "type": "string", "description": "用户价值" },
+        "bizValue": { "type": "string", "description": "商业价值" },
+        "perceivedValue": { "type": "string", "description": "用户感知价值" },
+        "market": {
+          "type": "object",
+          "required": ["tam", "sam", "som"],
+          "properties": {
+            "tam": { "type": "object", "properties": { "users": { "type": "number" }, "revenue": { "type": "number" }, "formatted": { "type": "string" }, "reason": { "type": "string" } } },
+            "sam": { "type": "object", "properties": { "users": { "type": "number" }, "revenue": { "type": "number" }, "formatted": { "type": "string" }, "reason": { "type": "string" } } },
+            "som": { "type": "object", "properties": { "users": { "type": "number" }, "revenue": { "type": "number" }, "formatted": { "type": "string" }, "reason": { "type": "string" } } }
+          }
+        },
+        "timing": {
+          "type": "object",
+          "properties": {
+            "tech": { "type": "string", "description": "技术成熟度" },
+            "social": { "type": "string", "description": "社会/政策环境" },
+            "competition": { "type": "string", "description": "竞品窗口期" }
+          }
+        },
+        "competitors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "positioning": { "type": "string", "description": "用户心智定位" },
+              "weakness": { "type": "string" },
+              "users": { "type": "string", "description": "用户规模" },
+              "url": { "type": "string" }
+            }
+          }
+        },
+        "differentiation": { "type": "string", "description": "差异化定位" }
+      }
+    },
+    "users": {
+      "type": "object",
+      "required": ["identity", "motivation", "personas", "scene", "story"],
+      "properties": {
+        "identity": { "type": "string", "description": "用户身份" },
+        "resources": { "type": "string", "description": "用户资源" },
+        "motivation": { "type": "string", "description": "用户动机" },
+        "personas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "age": { "type": "string" },
+              "job": { "type": "string" },
+              "behavior": { "type": "string" },
+              "pain": { "type": "string" },
+              "quote": { "type": "string" }
+            }
+          }
+        },
+        "scene": {
+          "type": "object",
+          "properties": {
+            "description": { "type": "string" },
+            "guidance": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "story": {
+          "type": "object",
+          "properties": {
+            "core": { "type": "string", "description": "核心用户故事" },
+            "auxiliary": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "design": {
+      "type": "object",
+      "properties": {
+        "form": { "type": "string", "enum": ["硬件", "Web", "移动端", "AI原生"], "description": "产品形态" },
+        "principles": { "type": "array", "items": { "type": "string" } },
+        "architecture": { "type": "string", "description": "核心页面架构" },
+        "corePath": { "type": "string", "description": "用户核心路径" }
+      }
+    },
+    "commercial": {
+      "type": "object",
+      "properties": {
+        "coreValue": { "type": "string", "description": "核心价值提炼" },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "plan": { "type": "string" },
+              "price": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "story": { "type": "string", "description": "营销故事" },
+        "contentStrategy": { "type": "string" }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "properties": {
+        "mvp": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "priority": { "type": "string", "enum": ["P0", "P1", "P2"] },
+              "feature": { "type": "string" },
+              "story": { "type": "string" }
+            }
+          }
+        },
+        "firstUsers": { "type": "string" },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "phase": { "type": "string" },
+              "goal": { "type": "string" },
+              "time": { "type": "string" }
+            }
+          }
+        },
+        "metrics": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "risk": { "type": "string" },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "summary": { "type": "string", "description": "总结" }
+  }
+}
